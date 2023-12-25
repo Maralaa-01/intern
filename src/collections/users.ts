@@ -1,0 +1,31 @@
+
+import { CollectionConfig } from "payload/types";
+
+export const Users: CollectionConfig = {
+  slug: 'users',
+  auth: {
+    verify: {
+      generateEmailHTML: ({token}) => {
+        return `hey ${token}`
+      }
+    },
+  },
+  access: {
+    read: () => true,
+    create: () => true
+  },
+  fields: [
+    {
+      name: 'role',
+      defaultValue: 'user',
+      required: true,
+      admin: {
+      },
+      type: 'select',
+      options: [
+        {label: 'Admin', value: 'admin'},
+        {label: 'User', value: 'user'}
+      ]
+    },
+  ],
+}
